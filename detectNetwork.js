@@ -21,7 +21,7 @@ var detectNetwork = function(cardNumber) {
   }
 
   // Visa always has a prefix of 4 and a length of 13, 16, or 19.
-  if (cardNumber.startsWith("4") === true && (cardNumber.length === "13" || "16" || "19")) {
+  if (cardNumber.startsWith("4") === true && (cardNumber.length === 13 || 16 || 19)) {
   	return "Visa";
   }
 
@@ -33,6 +33,26 @@ var detectNetwork = function(cardNumber) {
   									cardNumber.startsWith("55") === true)) {
   	return "MasterCard";
   }
+
+  // Discover always has a prefix of 6011, 644-649, or 65, and a length of 16 or 19.
+  if ((cardNumber.length === 16 || 19) &&  (cardNumber.startsWith("6011") === true ||
+  											cardNumber.startsWith("644") === true ||
+  											cardNumber.startsWith("645") === true ||
+  											cardNumber.startsWith("646") === true ||
+  											cardNumber.startsWith("647") === true ||
+  											cardNumber.startsWith("648") === true ||
+  											cardNumber.startsWith("649") === true ||
+  											cardNumber.startsWith("65") === true)) {
+  	return "Discover";
+  }
+
+  // Maestro always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
+  if ((cardNumber.length >= 12 && cardNumber.length <= 19) &&  (cardNumber.startsWith("5018") === true ||
+					  											cardNumber.startsWith("5020") === true ||
+					  											cardNumber.startsWith("5038") === true ||
+					  											cardNumber.startsWith("6304") === true)) {
+  	return "Maestro";
+  } 
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
 };
